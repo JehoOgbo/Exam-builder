@@ -7,7 +7,7 @@ from datetime import datetime
 import models
 from sqlalchemy import Column, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
-# from models.enum import UserType, ItemType
+from models.enum import QueryType
 import uuid
 
 time = "%Y-%m-%dT%H:%M:%s.%f"
@@ -66,6 +66,11 @@ class BaseModel:
         if save_fs is None:
             if "password" in new_dict:
                 del new_dict['password']
+        if "query_type" in new_dict:
+            if new_dict['query_type'] == QueryType.OBJECTIVE:
+                new_dict['query_type'] = 'objective'
+            else:
+                new_dict['query_type'] = 'theory'
         # if "user_type" in new_dict:
         #    if new_dict["user_type"] == UserType.REGULAR:
         #        new_dict["user_type"] = "regular"
