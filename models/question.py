@@ -2,7 +2,7 @@
 """holds class Question"""
 import models
 from models.base_model import BaseModel, Base
-from sqlalchemy import Column, String, ForeignKey
+from sqlalchemy import Column, String, ForeignKey, Enum
 from sqlalchemy.orm import relationship
 from models.enum import QueryType
 

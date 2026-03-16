@@ -1,0 +1,32 @@
+Logs a user in
+---
+tags:
+  - Sign-in and Sign-up
+parameters:
+  - name: login credentials
+    in: body
+    required: true
+    requires:
+      - email
+      - password
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+
+responses:
+  401:
+    description: Invalid email or password
+    schema:
+      properties:
+        message:
+          type: string
+          description: Invalid email or password
+  200:
+    description: Successful login
+    schema:
+      properties:
+        access_token:
+          type: string
+          description: bearer token for authentication

@@ -1,0 +1,63 @@
+Sign up a user
+---
+tags:
+  - User
+parameters:
+  - name: sign up credentials
+    in: body
+    required: true
+    requires:
+      - email
+      - password
+      - name
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+      name:
+        type: string
+
+responses:
+  401:
+    description: Invalid email or password
+    schema:
+      properties:
+        message:
+          type: string
+          description: Invalid email or password
+  400:
+    description: Duplicate entry
+    schema:
+      properties:
+        message:
+          type: string
+          description: The name already exists
+  200:
+    description: Successful Sign up
+    schema:
+      properties:
+        __class__:
+          type: string
+          description: class of object of the instance
+        created_at:
+          type: string
+          description: time of creation of the instance
+        updated_at:
+          type: string
+          description: time of last update of last update of the instance
+        id:
+          type: string
+          description: the uuid of the sender instance
+        name:
+          type: string
+          description: the name of the user
+        email:
+          type: string
+          description: email of the user
+        image_path:
+          type: string
+          description: path to the user's profile picture
+        saved_filename:
+          type: string
+          description: filename of the image file provided by the user

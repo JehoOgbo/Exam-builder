@@ -17,8 +17,8 @@ class User(BaseModel, Base):
     name = Column(String(128), nullable=False)
     email = Column(String(128), nullable=False, unique=True)
     password = Column(String(1024), nullable=False)
-    user_type = Column(Enum(UserType), default=UserType.REGULAR,
-                       nullable=False)
+    # user_type = Column(Enum(UserType), default=UserType.REGULAR,
+    #                   nullable=False)
     # phone_number = Column(String(128), nullable=True)
     # image_path = Column(String(255), nullable=True)
     # store a path to the image in image_path
