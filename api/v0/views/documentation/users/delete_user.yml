@@ -1,0 +1,25 @@
+Deletes a user Object from the database
+---
+description: This operation requires a valid JWT token.
+tags:
+  - Users
+security:
+  - Bearer: []
+parameters:
+  - name: user_id
+    in: path
+    type: string
+    required: true
+    description: The unique ID of the user to delete
+responses:
+  200:
+    description: User deleted successfully
+    schema:
+      type: object
+      properties: {}
+  401:
+    description: Invalid or missing token
+  404:
+    description: User not found
+  500:
+    description: Internal server error
