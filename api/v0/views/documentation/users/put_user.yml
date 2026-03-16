@@ -1,0 +1,38 @@
+Updates a user object
+---
+desciption: Updates the attributes of an existing user. Fields like 'id', 'email', and 'created_at' are ignored.
+tags:
+  - User
+security:
+  - Bearer: []
+parameters:
+  - name: user_id
+    in: path
+    type: string
+    required: true
+    description: The unique ID of the user to update
+  - name: body
+    in: body
+    required: true
+    schema:
+      id: UserUpdate
+      properties:
+        name:
+          type: string
+          example: "John Doe"
+        password:
+          type: string
+          example: "newsecurepassword123"
+responses:
+  200:
+    description: User updated successfully
+    schema:
+      $ref: '#/definitions/User'
+  400:
+    description: Not a JSON or invalid input
+  401:
+    description: Invalid or missing token
+  404:
+    description: User not found
+  409:
+    description: Conflict during save 

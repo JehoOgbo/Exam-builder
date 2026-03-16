@@ -71,12 +71,9 @@ def post_user():
     """
     Creates a user
     """
-    logging.debug("jUST sTARTED")
     if not request.get_json():
-        logging.debug("This ran")
         abort(400, description="Not a JSON")
 
-    logging.debug("I am alive")
     if 'name' not in request.get_json():
         abort(400, description="Missing name")
     if 'email' not in request.get_json():
@@ -91,13 +88,12 @@ def post_user():
     if value == 0:
         return make_response(jsonify(instance.to_dict()), 201)
     else:
-        logging.debug("This ran")
         abort(409)
 
 
 @app_views.route('/users/<user_id>', methods=['PUT'], strict_slashes=False)
 @jwt_required()
-# @swag_from('documentation/user/put_user.yml', methods=['PUT'])
+@swag_from('documentation/users/put_user.yml', methods=['PUT'])
 def put_user(user_id):
     """
     Updates a user
@@ -110,15 +106,15 @@ def put_user(user_id):
     if not request.get_json():
         abort(400, description="Not a JSON")
 
-    ignore = ['id', 'email', 'created_at', 'updated_at', 'image_path']
+    ignore = ['id', 'email', 'created_at', 'updated_at', 'image_path', 'password']
 
     data = request.get_json()
     for key, value in data.items():
         if value == '':
             continue
         if key not in ignore:
-            if key == 'password':
-                key = generate_password_hash(key)
+            #if key == 'password':
+            #    key = generate_password_hash(value)
             setattr(user, key, value)
     value = storage.save()
     if value == 0:
@@ -128,6 +124,7 @@ def put_user(user_id):
 
 @app_views.route('/users/<user_id>/pwd', methods=['PUT'], strict_slashes=False)
 @jwt_required()
+@swag_from('documentation/users/put_password.yml', methods=['PUT'])
 def put_pwd(user_id):
     """ updates the password """
     user = storage.get(User, user_id)

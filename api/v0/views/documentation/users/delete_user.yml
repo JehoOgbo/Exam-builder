@@ -2,7 +2,7 @@ Deletes a user Object from the database
 ---
 description: This operation requires a valid JWT token.
 tags:
-  - Users
+  - User
 security:
   - Bearer: []
 parameters:

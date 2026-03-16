@@ -66,6 +66,8 @@ class BaseModel:
         if save_fs is None:
             if "password" in new_dict:
                 del new_dict['password']
+        # Finds the first key starting with 'scrypt', deletes it, and returns None if not found
+        new_dict.pop(next((k for k in new_dict if k.startswith('scrypt:')), None), None)
         if "query_type" in new_dict:
             if new_dict['query_type'] == QueryType.OBJECTIVE:
                 new_dict['query_type'] = 'objective'
