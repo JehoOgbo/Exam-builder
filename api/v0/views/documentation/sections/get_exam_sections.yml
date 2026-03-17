@@ -1,0 +1,19 @@
+# get_exam_sections.yml
+tags:
+  - Sections
+summary: Retrieves all sections associated with a specific exam
+parameters:
+  - name: exam_id
+    in: path
+    description: ID of the exam
+    required: true
+    type: string
+responses:
+  200:
+    description: A list of sections
+    schema:
+      type: array
+      items:
+        $ref: '#/definitions/Section'
+  404:
+    description: Exam not found

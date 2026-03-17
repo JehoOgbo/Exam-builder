@@ -1,0 +1,18 @@
+Retrieves a list of all Section objects
+---
+description: Returns an array of section dictionaries. Requires a valid JWT.
+tags:
+  - Sections
+security:
+  - Bearer: []
+responses:
+  200:
+    description: A list of all sections retrieved successfully
+    schema:
+      type: array
+      items:
+        $ref: '#/definitions/Section'
+  401:
+    description: Invalid or missing JWT token
+  500:
+    description: Internal server error

@@ -1,0 +1,27 @@
+tags:
+  - Sections
+summary: Creates a new section
+parameters:
+  - name: body
+    in: body
+    required: true
+    schema:
+      type: object
+      required:
+        - name
+        - exam_id
+      properties:
+        name:
+          type: string
+          example: "Multiple Choice Section"
+        instruction:
+          type: string
+          example: "Answer all questions in this section."
+        exam_id:
+          type: string
+          example: "exam-uuid-1234"
+responses:
+  201:
+    description: Section created successfully
+  400:
+    description: Invalid JSON or missing required fields

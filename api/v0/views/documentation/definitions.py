@@ -22,7 +22,7 @@ schema_definitions = {
         "properties": {
             "id": {"type": "string", "example": "exam-uuid-456"},
             "school_name": {"type": "string", "example": "University of Lagos"},
-            "location": {"type": "string", "example": "Ojo, Lagos"},
+            "location": {"type": "string", "example": "Akoka Yaba, Lagos"},
             "subject_name": {"type": "string", "example": "Advanced Physics"},
             "session": {"type": "string", "example": "2025/2026"},
             "semester": {"type": "string", "example": "First"},
@@ -43,5 +43,17 @@ schema_definitions = {
             "new_password": {"type": "string", "example": "new_awesome_pass_456"}
         },
         "required": ["old_password", "new_password"]
+    },
+    "Section": {
+        "type": "object",
+        "properties": {
+            "id": {"type": "string", "example": "sect-uuid-789"},
+            "name": {"type": "string", "example": "Section A: Multiple Choice"},
+            "instructions": {"type": "string", "example": "Answer all questions in this section."},
+            "exam_id": {"type": "string", "example": "exam-uuid-456"},
+            "created_at": {"type": "string", "example": "2026-03-17T14:00:00.000000"},
+            "updated_at": {"type": "string", "example": "2026-03-17T15:00:00.000000"},
+            "__class__": {"type": "string", "example": "Section"}
+        }
     }
 }

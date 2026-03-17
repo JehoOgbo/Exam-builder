@@ -28,7 +28,7 @@ def get_exam():
 
 @app_views.route('/exams/<exam_id>', methods=['GET'], strict_slashes=False)
 @jwt_required()
-#@swag_from('documentation/exam/get_id_exam.yml', methods=['get'])
+@swag_from('documentation/exam/get_id_exam.yml', methods=['GET'])
 def get_specific_exam(exam_id):
     """ Retrieves a specific Exam """
     exam = storage.get(Exam, exam_id)
@@ -41,7 +41,7 @@ def get_specific_exam(exam_id):
 @app_views.route('/exams/<exam_id>', methods=['DELETE'],
                  strict_slashes=False)
 @jwt_required()
-#@swag_from('documentation/exam/delete_exam.yml', methods=['DELETE'])
+@swag_from('documentation/exam/delete_exam.yml', methods=['DELETE'])
 def delete_exam(exam_id):
     """
     Deletes a Exam Object
@@ -61,7 +61,7 @@ def delete_exam(exam_id):
 
 @app_views.route('/exams', methods=['POST'], strict_slashes=False)
 @jwt_required()
-#@swag_from('documentation/exam/post_exam.yml', methods=['POST'])
+@swag_from('documentation/exam/post_exam.yml', methods=['POST'])
 def post_exam():
     """
     Creates a Exam

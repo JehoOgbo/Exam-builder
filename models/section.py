@@ -14,6 +14,8 @@ class Section(BaseModel, Base):
     """Representation of the Section object"""
     __tablename__ = 'sections'
     name = Column(String(128), nullable=False)
+    instruction = Column(String(1024))
+    exam_id = Column(String(60), ForeignKey('exams.id'), nullable=False)
     questions = relationship("Question",
                           backref="exam",
                           cascade="all, delete, delete-orphan")

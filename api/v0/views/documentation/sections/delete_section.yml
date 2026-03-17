@@ -1,0 +1,14 @@
+tags:
+  - Sections
+summary: Deletes a section object
+parameters:
+  - name: section_id
+    in: path
+    description: ID of the section to delete
+    required: true
+    type: string
+responses:
+  200:
+    description: Section deleted (returns empty JSON)
+  404:
+    description: Section not found
