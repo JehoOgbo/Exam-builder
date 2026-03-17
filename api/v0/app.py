@@ -12,6 +12,7 @@ from uuid import uuid4
 from datetime import timedelta
 import os
 from flask import request, redirect, url_for
+from api.v0.views.documentation.definitions import schema_definitions # Import here
 
 app = Flask(__name__)
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
@@ -75,58 +76,6 @@ template = {
         "description": "API with JWT Authentication",
         "version": "1.0.1"
     },
-    "definitions": {
-        "User": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "string",
-                    "example": "2c7f607f-4243-4849-a9c8-52b0b2b5fb01"
-                },
-                "name": {
-                    "type": "string",
-                    "example": "John Doe"
-                },
-                "email": {
-                    "type": "string",
-                    "example": "john@example.com"
-                },
-                "__class__": {
-                    "type": "string",
-                    "example": "User"
-                },
-                "created_at": {
-                    "type": "string",
-                    "example": "2026-03-16T18:16:17"
-                },
-                "updated_at": {
-                    "type": "string",
-                    "example": "2026-03-16T18:16:17"
-                }
-            }
-        },
-        "UserUpdate": {
-            "type": "object",
-            "properties": {
-                "name": {"type": "string"},
-                "password": {"type": "string"}
-            }
-        },
-        "PasswordUpdate": {
-            "type": "object",
-            "properties": {
-                "old_password": {
-                    "type": "string",
-                    "example": "CurrentPassword123"
-                },
-                "new_password": {
-                    "type": "string",
-                    "example": "NewSecurePassword456"
-                }
-            },
-            "required": ["old_password", "new_password"]
-        }
-    },
     "securityDefinitions": {
         "Bearer": {
             "type": "apiKey",
@@ -134,13 +83,14 @@ template = {
             "in": "header",
             "description": "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\""
         }
-    }
+    },
+    "definitions": schema_definitions
 }
 
-app.config['SWAGGER'] = {
-    'title': 'Campus Logistics RESTful API',
-    'uiversion': 3
-}
+#app.config['SWAGGER'] = {
+#    'title': 'Campus Logistics RESTful API',
+#    'uiversion': 3
+#}
 
 Swagger(app, template=template)
 

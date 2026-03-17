@@ -1,0 +1,18 @@
+Retrieves the list of all Exam objects
+---
+description: Returns an array of exam dictionaries. Requires a valid JWT.
+tags:
+  - Exams
+security:
+  - Bearer: []
+responses:
+  200:
+    description: A list of all exams
+    schema:
+      type: array
+      items:
+        $ref: '#/definitions/Exam'
+  401:
+    description: Invalid or missing token
+  500:
+    description: Internal server error

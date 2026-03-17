@@ -14,7 +14,7 @@ from flask_jwt_extended import get_jwt_identity
 
 @app_views.route('/exams', methods=['GET'], strict_slashes=False)
 @jwt_required()
-#@swag_from('documentation/exam/get_exam.yml', methods=['GET'])
+@swag_from('documentation/exam/get_exam.yml', methods=['GET'])
 def get_exam():
     """
     Retrieves the list of all Exam objects
