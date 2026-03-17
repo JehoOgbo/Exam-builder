@@ -1,0 +1,22 @@
+tags:
+  - Options
+summary: Deletes an option object
+description: >
+  Deletes the option from the database. 
+  If an image is associated with this option, the physical file will also be deleted from the server storage.
+parameters:
+  - name: option_id
+    in: path
+    description: ID of the option to delete
+    required: true
+    type: string
+responses:
+  200:
+    description: Option and its associated file deleted successfully
+    schema:
+      type: object
+      example: {}
+  404:
+    description: Option not found
+  401:
+    description: Unauthorized - Valid JWT token required

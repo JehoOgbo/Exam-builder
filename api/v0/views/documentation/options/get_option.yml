@@ -1,0 +1,33 @@
+tags:
+  - Options
+summary: Retrieves a specific option by ID
+description: Returns a single option object, including the answer text and the image path if available.
+parameters:
+  - name: option_id
+    in: path
+    description: ID of the option to fetch
+    required: true
+    type: string
+responses:
+  200:
+    description: Option object found
+    schema:
+      type: object
+      properties:
+        id:
+          type: string
+        question_id:
+          type: string
+        answer_string:
+          type: string
+        image_path:
+          type: string
+          description: Path to the associated image file
+        created_at:
+          type: string
+        updated_at:
+          type: string
+  404:
+    description: Option not found
+  401:
+    description: Unauthorized - Valid JWT token required

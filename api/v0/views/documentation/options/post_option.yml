@@ -1,0 +1,20 @@
+tags:
+  - Options
+summary: Create a new option for a question
+consumes:
+  - multipart/form-data
+parameters:
+  - name: question_id
+    in: formData
+    type: string
+    required: true
+  - name: answer_string
+    in: formData
+    type: string
+    required: true
+  - name: image
+    in: formData
+    type: file
+responses:
+  201:
+    description: Created

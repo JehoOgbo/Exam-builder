@@ -1,0 +1,19 @@
+tags:
+  - Options
+summary: Update an option
+consumes:
+  - multipart/form-data
+parameters:
+  - name: option_id
+    in: path
+    required: true
+    type: string
+  - name: answer_string
+    in: formData
+    type: string
+  - name: image
+    in: formData
+    type: file
+responses:
+  200:
+    description: Updated

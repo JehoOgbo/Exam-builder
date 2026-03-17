@@ -1,0 +1,11 @@
+tags:
+  - Options
+summary: Get all options for a specific question
+parameters:
+  - name: question_id
+    in: path
+    required: true
+    type: string
+responses:
+  200:
+    description: List of options
