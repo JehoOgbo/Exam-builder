@@ -47,53 +47,6 @@ def delete_question(question_id):
     storage.save()
     return make_response(jsonify({}), 200)
 
-@app_views.route('/questions', methods=['POST'], strict_slashes=False)
-@jwt_required()
-@swag_from('documentation/questions/post_question.yml', methods=['POST'])
-def post_question():
-    """ Creates a question """
-    data = request.get_json()
-    if not data:
-        abort(400, description="Not a JSON")
-    
-    required = ['query', 'section_id']
-    for field in required:
-        if field not in data:
-            abort(400, description=f"Missing {field}")
-    
-    # Check if section exists
-    if not storage.get(Section, data['section_id']):
-        abort(400, description="Invalid section_id")
-
-    instance = Question(**data)
-    if instance.save() == 0:
-        return make_response(jsonify(instance.to_dict()), 201)
-    else:
-        abort(409)
-
-@app_views.route('/questions/<question_id>', methods=['PUT'], strict_slashes=False)
-@jwt_required()
-@swag_from('documentation/questions/put_question.yml', methods=['PUT'])
-def put_question(question_id):
-    """ Updates a question """
-    question = storage.get(Question, question_id)
-    if not question:
-        abort(404)
-
-    data = request.get_json()
-    if not data:
-        abort(400, description="Not a JSON")
-
-    ignore = ['id', 'created_at', 'updated_at', 'section_id']
-    for key, value in data.items():
-        if key not in ignore:
-            setattr(question, key, value)
-    
-    if storage.save() == 0:
-        return make_response(jsonify(question.to_dict()), 200)
-    else:
-        abort(409)
-
 # Define where to save images (you can also set this in your app config)
 UPLOAD_FOLDER = 'api/v0/static/uploads/questions'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
