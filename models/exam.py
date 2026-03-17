@@ -3,7 +3,7 @@
 import models
 from models.base_model import BaseModel, Base
 # from models.city import City
-from sqlalchemy import Column, String, ForeignKey
+from sqlalchemy import Column, String, ForeignKey, Date
 from sqlalchemy.orm import relationship
 
 
@@ -19,9 +19,10 @@ class Exam(BaseModel, Base):
     course_code = Column(String(32))
     time_allocated = Column(String(32))
     department_name = Column(String(128))
-    cities = relationship("Question",
-                          backref="exam",
-                          cascade="all, delete, delete-orphan")
+    date = Column(Date)
+    sections = relationship('Section',
+                            backref="exam",
+                            cascade='all, delete, delete-orphan')
 
     def __init__(self, *args, **kwargs):
         """initializes state"""

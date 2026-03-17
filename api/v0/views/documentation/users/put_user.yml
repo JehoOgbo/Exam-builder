@@ -20,9 +20,6 @@ parameters:
         name:
           type: string
           example: "John Doe"
-        password:
-          type: string
-          example: "newsecurepassword123"
 responses:
   200:
     description: User updated successfully
