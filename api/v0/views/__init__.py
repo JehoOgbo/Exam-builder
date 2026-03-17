@@ -8,6 +8,6 @@ from api.v0.views.users import *
 from api.v0.views.index import *
 from api.v0.views.exams import *
 from api.v0.views.questions import *
-# from api.v0.views.options import *
+from api.v0.views.options import *
 from api.v0.views.signin import *
 from api.v0.views.sections import *
