@@ -1,0 +1,52 @@
+Updates an existing Exam object
+---
+description: Provide the exam_id in the path and the fields to update in the JSON body.
+tags:
+  - Exams
+security:
+  - Bearer: []
+parameters:
+  - name: exam_id
+    in: path
+    type: string
+    required: true
+    description: The UUID of the exam to update
+  - name: body
+    in: body
+    required: true
+    schema:
+      type: object
+      properties:
+        school_name:
+          type: string
+          example: "University of Lagos (Updated)"
+        location:
+          type: string
+        subject_name:
+          type: string
+        session:
+          type: string
+        semester:
+          type: string
+        class_or_level:
+          type: string
+        course_code:
+          type: string
+        time_allocated:
+          type: string
+        department_name:
+          type: string
+        date:
+          type: string
+          format: date
+responses:
+  200:
+    description: Exam updated successfully
+    schema:
+      $ref: '#/definitions/Exam'
+  400:
+    description: Not a JSON or invalid data
+  401:
+    description: Invalid or missing token
+  404:
+    description: No exam found with the provided ID

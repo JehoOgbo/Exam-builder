@@ -1,0 +1,32 @@
+tags:
+  - Questions
+summary: Retrieves a specific question by ID
+description: Returns a single question object based on the provided UUID.
+parameters:
+  - name: question_id
+    in: path
+    description: ID of the question to fetch
+    required: true
+    type: string
+responses:
+  200:
+    description: Question object found
+    schema:
+      type: object
+      properties:
+        id:
+          type: string
+        query:
+          type: string
+        query_type:
+          type: string
+        section_id:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+  404:
+    description: Question not found
+  401:
+    description: Unauthorized - Valid JWT token required

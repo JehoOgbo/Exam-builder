@@ -1,0 +1,22 @@
+Retrieves a specific Exam object by ID
+---
+description: Returns a single exam dictionary. Requires a valid JWT.
+tags:
+  - Exams
+security:
+  - Bearer: []
+parameters:
+  - name: exam_id
+    in: path
+    type: string
+    required: true
+    description: The unique UUID of the exam to retrieve
+responses:
+  200:
+    description: Exam object found and returned
+    schema:
+      $ref: '#/definitions/Exam'
+  401:
+    description: Invalid or missing token
+  404:
+    description: No exam found with the provided ID

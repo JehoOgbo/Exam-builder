@@ -1,0 +1,22 @@
+tags:
+  - Questions
+summary: Deletes a specific question
+description: >
+  Deletes a question object from the database. 
+  Note: This will also delete all associated 'Options' due to cascade settings.
+parameters:
+  - name: question_id
+    in: path
+    description: ID of the question to delete
+    required: true
+    type: string
+responses:
+  200:
+    description: Question deleted successfully
+    schema:
+      type: object
+      example: {}
+  404:
+    description: Question not found
+  401:
+    description: Unauthorized - Valid JWT token required

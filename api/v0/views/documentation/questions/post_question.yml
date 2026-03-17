@@ -1,0 +1,30 @@
+tags:
+  - Questions
+summary: Create a new question with an image upload
+consumes:
+  - multipart/form-data
+parameters:
+  - name: query
+    in: formData
+    type: string
+    required: true
+    description: The question text
+  - name: section_id
+    in: formData
+    type: string
+    required: true
+    description: UUID of the section
+  - name: query_type
+    in: formData
+    type: string
+    enum: ["OBJECTIVE", "THEORY"]
+    default: "OBJECTIVE"
+  - name: image
+    in: formData
+    type: file
+    description: The image file to upload
+responses:
+  201:
+    description: Question created with image path saved
+  400:
+    description: Missing required form fields

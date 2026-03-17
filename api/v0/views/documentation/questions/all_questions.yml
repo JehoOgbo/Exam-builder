@@ -1,0 +1,6 @@
+tags:
+  - Questions
+summary: Retrieves all questions
+responses:
+  200:
+    description: List of all questions

@@ -1,0 +1,58 @@
+Creates a new Exam object
+---
+description: Expects a JSON body with at least a name. Returns the created exam object.
+tags:
+  - Exams
+security:
+  - Bearer: []
+parameters:
+  - name: body
+    in: body
+    required: true
+    schema:
+      type: object
+      required:
+        - name
+      properties:
+        school_name:
+          type: string
+          example: "University of Lagos"
+        location:
+          type: string
+          example: "Main Auditorium"
+        subject_name:
+          type: string
+          example: "Advanced Physics"
+        session:
+          type: string
+          example: "2025/2026"
+        semester:
+          type: string
+          example: "First"
+        class_or_level:
+          type: string
+          example: "400 Level"
+        course_code:
+          type: string
+          example: "PHY401"
+        time_allocated:
+          type: string
+          example: "2 Hours"
+        department_name:
+          type: string
+          example: "Science"
+        date:
+          type: string
+          format: date
+          example: "2026-06-15"
+responses:
+  201:
+    description: Exam created successfully
+    schema:
+      $ref: '#/definitions/Exam'
+  400:
+    description: Not a JSON or missing required fields (name)
+  401:
+    description: Invalid or missing token
+  409:
+    description: Database conflict error (could not save)

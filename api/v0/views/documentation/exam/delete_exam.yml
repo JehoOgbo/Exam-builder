@@ -1,0 +1,25 @@
+Deletes a specific Exam object
+---
+description: Removes the exam from the database. Requires a valid JWT.
+tags:
+  - Exams
+security:
+  - Bearer: []
+parameters:
+  - name: exam_id
+    in: path
+    type: string
+    required: true
+    description: The UUID of the exam to delete
+responses:
+  200:
+    description: Exam deleted successfully
+    schema:
+      type: object
+      properties: {}
+  401:
+    description: Invalid or missing token
+  404:
+    description: No exam found with that ID
+  500:
+    description: Internal server error during deletion

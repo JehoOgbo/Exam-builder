@@ -1,0 +1,13 @@
+tags:
+  - Questions
+summary: Get questions by Section ID
+parameters:
+  - name: section_id
+    in: path
+    required: true
+    type: string
+responses:
+  200:
+    description: List of questions for this section
+  404:
+    description: Section not found

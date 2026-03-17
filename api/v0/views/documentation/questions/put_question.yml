@@ -1,0 +1,24 @@
+tags:
+  - Questions
+summary: Update a question
+parameters:
+  - name: question_id
+    in: path
+    required: true
+    type: string
+  - name: body
+    in: body
+    required: true
+    schema:
+      type: object
+      properties:
+        query:
+          type: string
+        query_type:
+          type: string
+          enum: ["OBJECTIVE", "THEORY"]
+responses:
+  200:
+    description: Updated
+  404:
+    description: Not found

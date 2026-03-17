@@ -12,6 +12,7 @@ class Option(BaseModel, Base):
     __tablename__ = 'options'
     question_id = Column(String(60), ForeignKey('questions.id'), nullable=False)
     answer_string = Column(String(128), unique=True)
+    image_path = Column(String(128))
     # answer_image = C
     # query_type = Column(Enum(QueryType), default=QueryType.OBJECTIVE, nullable=False)
 
