@@ -7,17 +7,6 @@ from flask import abort, jsonify, make_response, request
 from flasgger.utils import swag_from
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
-@app_views.route('/sections', methods=['GET'], strict_slashes=False)
-@jwt_required()
-@swag_from('documentation/sections/all_sections.yml', methods=['GET'])
-def get_sections():
-    """
-    Retrieves the list of all section objects
-    """
-    all_sections = storage.all(Section).values()
-    list_sections = [section.to_dict() for section in all_sections]
-    return jsonify(list_sections)
-
 @app_views.route('/exams/<exam_id>/sections', methods=['GET'], strict_slashes=False)
 @jwt_required()
 @swag_from('documentation/sections/get_exam_sections.yml', methods=['GET'])
