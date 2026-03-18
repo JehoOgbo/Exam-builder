@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - ExamBuilder</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="dashboard-body">
+    <div class="background-anim">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3" style="animation-duration: 20s; opacity: 0.3;"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar glass-panel">
+        <div class="nav-brand">ExamBuilder</div>
+        <div class="nav-links">
+            <span id="user-display-name" class="user-name">Welcome</span>
+            <button class="btn btn-secondary btn-sm" id="logout-btn">Logout</button>
+        </div>
+    </nav>
+
+    <div class="container main-content">
+        <header class="dashboard-header glass-panel">
+            <div class="header-text">
+                <h2>Your Exams</h2>
+                <p>Manage and create your assessments</p>
+            </div>
+            <button class="btn btn-primary" id="create-exam-btn" onclick="window.location.href='builder.html'">
+                ✨ Create New Exam
+            </button>
+        </header>
+
+        <div id="loading" class="loading-spinner hidden">Loading exams...</div>
+        <div id="error-msg" class="error-message hidden"></div>
+        
+        <div id="exams-grid" class="exams-grid">
+            <!-- Exam cards loaded dynamically via JS -->
+        </div>
+
+        <div id="empty-state" class="empty-state glass-panel hidden">
+            <div class="empty-icon">📝</div>
+            <h3>No exams yet!</h3>
+            <p>Ready to assess your students? Create your first beautifully formatted exam now.</p>
+            <br>
+            <button class="btn btn-primary" onclick="window.location.href='builder.html'">Create Exam</button>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
