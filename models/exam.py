@@ -20,6 +20,7 @@ class Exam(BaseModel, Base):
     time_allocated = Column(String(32))
     department_name = Column(String(128))
     date = Column(Date)
+    user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
     sections = relationship('Section',
                             backref="exam",
                             cascade='all, delete, delete-orphan')

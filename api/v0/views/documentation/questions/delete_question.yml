@@ -1,6 +1,8 @@
 tags:
   - Questions
 summary: Deletes a specific question
+security:
+  - Bearer: []
 description: >
   Deletes a question object from the database. 
   Note: This will also delete all associated 'Options' due to cascade settings.

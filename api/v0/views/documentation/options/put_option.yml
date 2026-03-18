@@ -1,6 +1,8 @@
 tags:
   - Options
 summary: Update an option
+security:
+  - Bearer: []
 consumes:
   - multipart/form-data
 parameters:

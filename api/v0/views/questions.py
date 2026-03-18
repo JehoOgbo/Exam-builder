@@ -20,9 +20,9 @@ def get_questions_by_section(section_id):
     section = storage.get(Section, section_id)
     if not section:
         abort(404, description="Section not found")
-    
-    all_questions = storage.all(Question).values()
-    list_questions = [q.to_dict() for q in all_questions if q.section_id == section_id]
+    list_questions = []
+    for question in section.questions:
+        list_questions.append(question.to_dict())
     return jsonify(list_questions)
 
 @app_views.route('/questions/<question_id>', methods=['GET'], strict_slashes=False)
@@ -60,7 +60,6 @@ def post_question():
     # Since we are sending a file, we use request.form instead of get_json()
     query = request.form.get('query')
     section_id = request.form.get('section_id')
-    query_type = request.form.get('query_type', 'OBJECTIVE')
 
     if not query or not section_id:
         abort(400, description="Missing query or section_id")
@@ -85,7 +84,6 @@ def post_question():
     new_data = {
         "query": query,
         "section_id": section_id,
-        "query_type": query_type,
         "image_path": image_path
     }
     

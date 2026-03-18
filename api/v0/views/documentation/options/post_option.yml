@@ -1,6 +1,8 @@
 tags:
   - Options
 summary: Create a new option for a question
+security:
+  - Bearer: []
 consumes:
   - multipart/form-data
 parameters:

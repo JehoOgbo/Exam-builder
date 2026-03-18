@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """ objects that handle default RESTful API actions for Exams """
+from models.user import User
 from models.exam import Exam
 from models import storage
 from api.v0.views import app_views
@@ -7,21 +8,24 @@ from flask import abort, jsonify, make_response, request
 from flasgger.utils import swag_from
 from flask_jwt_extended import jwt_required
 from flask_jwt_extended import get_jwt_identity
-
+from flask import current_app
+from datetime import datetime
 
 # current_dir = os.path.dirname(os.path.abspath(__file__))
 # yaml_path = os.path.join(current_dir, 'exam', 'get_exam.yml')
 
-@app_views.route('/exams', methods=['GET'], strict_slashes=False)
+@app_views.route('/users/<user_id>/exams', methods=['GET'], strict_slashes=False)
 @jwt_required()
 @swag_from('documentation/exam/get_exam.yml', methods=['GET'])
-def get_exam():
+def get_exam(user_id):
     """
-    Retrieves the list of all Exam objects
+    Retrieves the list of all Exam objects belonging a user
     """
-    all_exams = storage.all(Exam).values()
+    user = storage.get(User, user_id)
+    if not user:
+        abort(404, description="User not found")
     list_exams = []
-    for exam in all_exams:
+    for exam in user.exams:
         list_exams.append(exam.to_dict())
     return jsonify(list_exams)
 
@@ -69,11 +73,19 @@ def post_exam():
     current_user = get_jwt_identity()
     if not request.get_json():
         abort(400, description="Not a JSON")
-
-    if 'name' not in request.get_json():
-        abort(400, description="Missing name")
-
+    current_app.logger.debug(f"I am alive")
     data = request.get_json()
+
+    if 'date' in data and isinstance(data['date'], str):
+        try:
+            # This turns the string into a real Python date object
+            data['date'] = datetime.strptime(data['date'], '%Y-%m-%d').date()
+        except ValueError:
+            abort(400, description="Invalid date format. Use YYYY-MM-DD")
+
+    if 'school_name' not in data:
+        abort(400, description="Missing school_name")
+
     instance = Exam(**data)
     value = instance.save()
     if value == 0:
@@ -84,7 +96,7 @@ def post_exam():
 
 @app_views.route('/exams/<exam_id>', methods=['PUT'], strict_slashes=False)
 @jwt_required()
-#@swag_from('documentation/exam/put_exam.yml', methods=['PUT'])
+@swag_from('documentation/exam/put_exam.yml', methods=['PUT'])
 def put_exam(exam_id):
     """
     Updates a Exam

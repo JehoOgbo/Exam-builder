@@ -1,6 +1,8 @@
 tags:
   - Sections
 summary: Retrieves a specific section by ID
+security:
+  - Bearer: []
 parameters:
   - name: section_id
     in: path

@@ -1,6 +1,8 @@
 tags:
   - Options
 summary: Retrieves a specific option by ID
+security:
+  - Bearer: []
 description: Returns a single option object, including the answer text and the image path if available.
 parameters:
   - name: option_id

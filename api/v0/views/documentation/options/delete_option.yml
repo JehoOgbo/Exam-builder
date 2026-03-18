@@ -1,6 +1,8 @@
 tags:
   - Options
 summary: Deletes an option object
+security:
+  - Bearer: []
 description: >
   Deletes the option from the database. 
   If an image is associated with this option, the physical file will also be deleted from the server storage.

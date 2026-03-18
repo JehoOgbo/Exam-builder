@@ -5,6 +5,12 @@ tags:
   - Exams
 security:
   - Bearer: []
+parameters:
+  - name: user_id
+    in: path
+    type: string
+    required: true
+    description: the unique UUID of the user
 responses:
   200:
     description: A list of all exams

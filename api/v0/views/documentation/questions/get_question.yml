@@ -1,6 +1,8 @@
 tags:
   - Questions
 summary: Retrieves a specific question by ID
+security:
+  - Bearer: []
 description: Returns a single question object based on the provided UUID.
 parameters:
   - name: question_id

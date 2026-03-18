@@ -17,7 +17,7 @@ class Section(BaseModel, Base):
     instruction = Column(String(1024))
     exam_id = Column(String(60), ForeignKey('exams.id'), nullable=False)
     questions = relationship("Question",
-                          backref="exam",
+                          backref="section",
                           cascade="all, delete, delete-orphan")
 
     def __init__(self, *args, **kwargs):

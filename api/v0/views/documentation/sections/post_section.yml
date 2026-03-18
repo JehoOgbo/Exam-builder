@@ -1,6 +1,8 @@
 tags:
   - Sections
 summary: Creates a new section
+security:
+  - Bearer: []
 parameters:
   - name: body
     in: body

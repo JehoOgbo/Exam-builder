@@ -2,6 +2,8 @@
 tags:
   - Sections
 summary: Retrieves all sections associated with a specific exam
+security:
+  - Bearer: []
 parameters:
   - name: exam_id
     in: path

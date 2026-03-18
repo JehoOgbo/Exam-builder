@@ -1,5 +1,7 @@
 tags:
   - Questions
+security:
+  - Bearer: []
 summary: Get questions by Section ID
 parameters:
   - name: section_id

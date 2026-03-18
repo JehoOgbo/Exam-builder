@@ -55,9 +55,3 @@ responses:
         email:
           type: string
           description: email of the user
-        image_path:
-          type: string
-          description: path to the user's profile picture
-        saved_filename:
-          type: string
-          description: filename of the image file provided by the user

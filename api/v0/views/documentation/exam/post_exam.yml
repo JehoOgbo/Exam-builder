@@ -14,6 +14,9 @@ parameters:
       required:
         - name
       properties:
+        user_id:
+          type: string
+          example: "uuid4"
         school_name:
           type: string
           example: "University of Lagos"

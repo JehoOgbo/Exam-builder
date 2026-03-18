@@ -1,6 +1,8 @@
 tags:
   - Sections
 summary: Deletes a section object
+security:
+  - Bearer: []
 parameters:
   - name: section_id
     in: path

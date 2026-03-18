@@ -1,6 +1,8 @@
 tags:
   - Questions
 summary: Retrieves all questions
+security:
+  - Bearer: []
 responses:
   200:
     description: List of all questions

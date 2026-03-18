@@ -34,15 +34,3 @@ responses:
         email:
           type: string
           description: email of the user
-        phone_number:
-          type: string
-          description: phone_number of the user
-        user_type:
-          type: string
-          description: shows whether user is a regular user or an admin
-        image_path:
-          type: string
-          description: path to the user's profile picture
-        saved_filename:
-          type: string
-          description: filename of the image file provided by the user

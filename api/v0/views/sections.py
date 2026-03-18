@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """ objects that handle all default RestFul API actions for Sections """
 from models.section import Section
+from models.exam import Exam
 from models import storage
 from api.v0.views import app_views
 from flask import abort, jsonify, make_response, request
@@ -20,12 +21,9 @@ def get_sections_by_exam(exam_id):
         abort(404, description="Exam not found")
 
     # Filter sections where exam_id matches
-    all_sections = storage.all(Section).values()
-    list_sections = [
-        section.to_dict() for section in all_sections 
-        if section.exam_id == exam_id
-    ]
- 
+    list_sections = []
+    for section in exam.sections:
+        list_sections.append(section.to_dict())
     return jsonify(list_sections)
 
 @app_views.route('/sections/<section_id>', methods=['GET'], strict_slashes=False)

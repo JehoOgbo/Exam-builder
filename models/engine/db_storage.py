@@ -123,13 +123,14 @@ from models.user import User
 from models.exam import Exam
 from models.question import Question
 from models.option import Option
+from models.section import Section
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.exc import IntegrityError
 from os import getenv
 from dotenv import load_dotenv
 
-classes = {"Exam": Exam, "Question": Question, "Option": Option, "User": User}
+classes = {"Exam": Exam, "Question": Question, "Option": Option, "User": User, "Section": Section}
 
 load_dotenv()
 

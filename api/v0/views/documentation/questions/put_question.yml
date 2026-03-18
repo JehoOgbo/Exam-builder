@@ -1,24 +1,47 @@
+Updates a specific Question object
+---
 tags:
   - Questions
-summary: Update a question
+security:
+  - Bearer: []
 parameters:
   - name: question_id
     in: path
+    description: ID of the question to update
     required: true
     type: string
-  - name: body
-    in: body
-    required: true
-    schema:
-      type: object
-      properties:
-        query:
-          type: string
-        query_type:
-          type: string
-          enum: ["OBJECTIVE", "THEORY"]
+  - name: image
+    in: formData
+    description: Optional new image file for the question
+    type: file
+  - name: query
+    in: formData
+    description: The text content of the question
+    type: string
+  - name: marks
+    in: formData
+    description: Marks allocated to the question
+    type: integer
 responses:
   200:
-    description: Updated
+    description: Question updated successfully
+    schema:
+      properties:
+        id:
+          type: string
+        text:
+          type: string
+        image_path:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+  400:
+    description: Invalid input or missing required fields
+  401:
+    description: Missing or invalid JWT token
   404:
-    description: Not found
+    description: Question not found
+  409:
+    description: Database conflict/integrity error
