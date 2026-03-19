@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Builder</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="builder-body">
+    <div class="print-watermark hidden-screen">ExamBuilder Generated</div>
+    
+    <nav class="navbar glass-panel">
+        <div class="nav-brand" onclick="window.location.href='dashboard.html'" style="cursor:pointer">← Dashboard</div>
+        <div class="nav-links">
+            <button class="btn btn-secondary" id="print-btn" title="Save as PDF">🖨️ PDF</button>
+            <button class="btn btn-primary" id="save-exam-btn">💾 Save Exam</button>
+        </div>
+    </nav>
+
+    <div class="container main-content builder-content" id="printable-area">
+        <div id="save-status" class="hidden"></div>
+        
+        <!-- Exam Meta Form -->
+        <div class="glass-panel builder-section exam-meta">
+            <h2 class="print-hidden">Exam Settings</h2>
+            <div class="print-exam-header hidden-screen">
+                <h1 id="print-school" class="print-center">School Name</h1>
+                <h2 id="print-dept" class="print-center">Department</h2>
+                <h3 id="print-subject" class="print-center">Subject</h3>
+            </div>
+            
+            <div class="form-grid" id="meta-grid">
+                <div class="input-group">
+                    <label>School Name</label>
+                    <input type="text" id="meta-school_name" placeholder="e.g. University of Lagos">
+                </div>
+                <div class="input-group">
+                    <label>Subject Name</label>
+                    <input type="text" id="meta-subject_name" placeholder="e.g. Advanced Physics">
+                </div>
+                <div class="input-group">
+                    <label>Course Code</label>
+                    <input type="text" id="meta-course_code" placeholder="e.g. PHY401">
+                </div>
+                <div class="input-group">
+                    <label>Department Name</label>
+                    <input type="text" id="meta-department_name" placeholder="e.g. Science">
+                </div>
+                <div class="input-group">
+                    <label>Class / Level</label>
+                    <input type="text" id="meta-class_or_level" placeholder="e.g. 400 Level">
+                </div>
+                <div class="input-group">
+                    <label>Location</label>
+                    <input type="text" id="meta-location" placeholder="e.g. Main Hall">
+                </div>
+                <div class="input-group">
+                    <label>Session</label>
+                    <input type="text" id="meta-session" placeholder="e.g. 2025/2026">
+                </div>
+                <div class="input-group">
+                    <label>Semester</label>
+                    <input type="text" id="meta-semester" placeholder="e.g. First">
+                </div>
+                <div class="input-group">
+                    <label>Time Allocated</label>
+                    <input type="text" id="meta-time_allocated" placeholder="e.g. 2 Hours">
+                </div>
+                <div class="input-group">
+                    <label>Date</label>
+                    <input type="date" id="meta-date">
+                </div>
+            </div>
+            <hr class="print-hidden" style="margin-top:20px; border-color:var(--glass-border);">
+        </div>
+
+        <!-- Sections Container -->
+        <div id="sections-container"></div>
+
+        <button class="btn btn-secondary print-hidden" id="add-section-btn" style="width: 100%; margin-top: 20px;">
+            <span style="font-size:1.2rem; margin-right:8px;">+</span> Add New Section
+        </button>
+    </div>
+
+    <!-- Templates -->
+    <template id="tpl-section">
+        <div class="glass-panel builder-section dynamic-section fade-in">
+            <div class="section-header print-flex">
+                <input type="text" class="section-name sec-input" placeholder="Section Name (e.g. Section A: Multiple Choice)">
+                <button class="btn btn-danger btn-sm remove-sec-btn print-hidden">X</button>
+            </div>
+            <textarea class="section-instructions sec-input" placeholder="Section Instructions..."></textarea>
+            
+            <div class="questions-container"></div>
+            <button class="btn btn-secondary btn-sm add-question-btn print-hidden" style="margin-top:15px">+ Add Question</button>
+        </div>
+    </template>
+
+    <template id="tpl-question">
+        <div class="question-block fade-in">
+            <div class="q-header print-flex">
+                <span class="q-number print-only"></span>
+                <input type="text" class="q-title sec-input" placeholder="Question text...">
+                <button class="btn btn-danger btn-sm remove-q-btn print-hidden">X</button>
+            </div>
+            
+            <div class="options-container"></div>
+            <button class="btn btn-secondary btn-sm add-option-btn print-hidden" style="margin-top:10px">+ Add Option</button>
+        </div>
+    </template>
+
+    <template id="tpl-option">
+        <div class="option-block fade-in">
+            <input type="radio" class="opt-correct print-hidden" value="1" title="Mark as correct">
+            <span class="print-radio hidden-screen"></span>
+            <span class="opt-label hidden-screen"></span>
+            <input type="text" class="opt-text sec-input" placeholder="Option text...">
+            <button class="btn btn-danger btn-sm remove-opt-btn print-hidden">X</button>
+        </div>
+    </template>
+
+    <script src="js/api.js"></script>
+    <script src="js/builder.js"></script>
+</body>
+</html>

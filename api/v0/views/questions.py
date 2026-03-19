@@ -60,6 +60,7 @@ def post_question():
     # Since we are sending a file, we use request.form instead of get_json()
     query = request.form.get('query')
     section_id = request.form.get('section_id')
+    marks = request.form.get('marks')
 
     if not query or not section_id:
         abort(400, description="Missing query or section_id")
@@ -84,7 +85,8 @@ def post_question():
     new_data = {
         "query": query,
         "section_id": section_id,
-        "image_path": image_path
+        "image_path": image_path,
+        "marks": marks
     }
     
     instance = Question(**new_data)

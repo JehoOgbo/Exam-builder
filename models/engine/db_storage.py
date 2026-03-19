@@ -217,3 +217,7 @@ class DBStorage:
             count = self.__session.query(target_cls).count()
 
         return count
+ 
+    def get_session(self):
+        """Returns the current database session"""
+        return self.__session

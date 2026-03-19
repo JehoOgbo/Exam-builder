@@ -11,3 +11,4 @@ from api.v0.views.questions import *
 from api.v0.views.options import *
 from api.v0.views.signin import *
 from api.v0.views.sections import *
+from api.v0.views.pdf import *

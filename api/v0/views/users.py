@@ -12,6 +12,7 @@ from flask_jwt_extended import get_jwt_identity
 import os
 from uuid import uuid4
 import logging
+from email_validator import validate_email, EmailNotValidError
 
 
 logging.basicConfig(level=logging.DEBUG)
@@ -82,6 +83,11 @@ def post_user():
         abort(400, description="Missing password")
 
     data = request.get_json()
+    try:
+        email_info = validate_email(data.get('email'), check_deliverability=True)
+        email = email_info.normalized
+    except EmailNotValidError as e:
+        abort(400, description=str(e))
     data['password'] = generate_password_hash(data['password'])
     instance = User(**data)
     value = instance.save()

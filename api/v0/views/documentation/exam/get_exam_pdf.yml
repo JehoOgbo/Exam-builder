@@ -1,0 +1,27 @@
+Generates a downloadable PDF of the Exam
+---
+description: Fetches the exam, its sections, and questions to render a formatted PDF paper. Requires a valid JWT.
+tags:
+  - Exams
+security:
+  - Bearer: []
+parameters:
+  - name: exam_id
+    in: path
+    type: string
+    required: true
+    description: The UUID of the exam to export to PDF
+responses:
+  200:
+    description: PDF file generated successfully
+    content:
+      application/pdf:
+        schema:
+          type: string
+          format: binary
+  401:
+    description: Invalid or missing token
+  404:
+    description: Exam not found
+  500:
+    description: PDF generation failed (check wkhtmltopdf installation)
