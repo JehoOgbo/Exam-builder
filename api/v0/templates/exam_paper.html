@@ -1,74 +1,57 @@
 <!DOCTYPE html>
 <html>
 <head>
-    /* <style>
-        body { font-family: 'Times New Roman', serif; line-height: 1.6; padding: 20px; }
-        .header { text-align: center; margin-bottom: 30px; border-bottom: 2px solid #000; padding-bottom: 10px; }
-        .section { margin-top: 25px; }
-        .section-title { font-weight: bold; text-transform: uppercase; text-decoration: underline; }
-        .question-container { margin-bottom: 15px; page-break-inside: avoid; }
-        .question-text { font-weight: bold; margin-bottom: 5px; }
-        .options-grid { 
-            display: table; 
-            width: 100%; 
-            margin-left: 20px; 
-            margin-top: 5px; 
+    <meta charset="UTF-8">
+    <style>
+        @font-face {
+            font-family: 'ExamFont';
+            src: url('file://{{ font_path }}');
         }
-        .option { display: table-cell; width: 50%; padding: 2px; }
-        .marks { float: right; font-style: italic; font-weight: normal; }
-        /* Prevents a question from being split across two pages */
-        .question-container {
-            page-break-inside: avoid;
-            margin-bottom: 20px;
-        }
-
-        /* Forces a new page for each major Section if they are long */
-        .section {
-            page-break-before: auto;
-        }
-
-        /* Ensures the header stays at the top of the first page */
-        .header {
-            page-break-after: avoid;
-        }
+        body { font-family: 'ExamFont', serif; line-height: 1.5; padding: 20px; }
+        .header { text-align: center; border-bottom: 2px solid #000; margin-bottom: 20px; }
+        .section-header { text-align: center; margin: 30px 0 10px; font-weight: bold; text-decoration: underline; }
+        .question-container { margin-bottom: 25px; page-break-inside: avoid; }
+        .marks { float: right; font-style: italic; }
+        .options-grid { margin-left: 30px; margin-top: 10px; }
+        .option-item { display: inline-block; width: 48%; vertical-align: top; margin-bottom: 10px; }
+        
+        /* Image Sizing */
+        .exam-image { max-width: 400px; max-height: 300px; display: block; margin: 10px 0; }
+        .option-image { max-width: 150px; display: block; margin-top: 5px; }
     </style>
-    */
 </head>
 <body>
     <div class="header">
         <h1>{{ exam.school_name }}</h1>
-        <h2>{{ exam.department_name }}</h2>
-        <h3>{{ exam.course_code }}: {{ exam.subject_name }} ({{ exam.semester }} Semester)</h3>
-        <p><b>Session:</b> {{ exam.session }} | <b>Time:</b> {{ exam.time_allocated }}</p>
+        <p><b>{{ exam.course_code }}: {{ exam.subject_name }}</b></p>
     </div>
 
     {% for section in exam.sections %}
-    <div class="section">
-        <div class="section-title">{{ section.name }}</div>
-        <p><i>{{ section.instructions }}</i></p>
-        
+        <div class="section-header">{{ section.name }}</div>
+
         {% for question in section.questions %}
         <div class="question-container">
-            <div class="question-text">
-                {{ loop.index }}. {{ question.query }}
-                <span class="marks">({{ question.marks }} mks)</span>
+            <div>
+                <b>{{ loop.index }}.</b> {{ question.query }}
+                {% if question.marks %}<span class="marks">({{ question.marks }} mks)</span>{% endif %}
             </div>
 
-            {% if question.options %}
+            {% if question.image_data %}
+                <img src="{{ question.image_data }}" class="exam-image">
+            {% endif %}
+
             <div class="options-grid">
                 {% for option in question.options %}
-                <div class="option">
-                    {# Converts 0, 1, 2, 3 to A, B, C, D #}
+                <div class="option-item">
                     ({{ "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[loop.index0] }}) {{ option.answer_string }}
+                    {% if option.image_data %}
+                        <img src="{{ option.image_data }}" class="option-image">
+                    {% endif %}
                 </div>
-                {# Every 2 options, start a new row for a clean 2x2 grid #}
-                {% if loop.index % 2 == 0 %}</div><div class="options-grid">{% endif %}
                 {% endfor %}
             </div>
-            {% endif %}
         </div>
         {% endfor %}
-    </div>
     {% endfor %}
 </body>
 </html>

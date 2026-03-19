@@ -1,6 +1,6 @@
-Generates a downloadable PDF of the Exam
+Generates a formatted Exam PDF
 ---
-description: Fetches the exam, its sections, and questions to render a formatted PDF paper. Requires a valid JWT.
+description: Supports math fonts, images, and professional layout. Use ?mode=preview for browser view.
 tags:
   - Exams
 security:
@@ -10,18 +10,18 @@ parameters:
     in: path
     type: string
     required: true
-    description: The UUID of the exam to export to PDF
+  - name: mode
+    in: query
+    type: string
+    enum: [download, preview]
+    default: download
 responses:
   200:
-    description: PDF file generated successfully
+    description: PDF successfully generated
     content:
       application/pdf:
         schema:
           type: string
           format: binary
-  401:
-    description: Invalid or missing token
   404:
-    description: Exam not found
-  500:
-    description: PDF generation failed (check wkhtmltopdf installation)
+    description: Exam ID does not exist
