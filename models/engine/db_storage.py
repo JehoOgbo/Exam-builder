@@ -141,12 +141,15 @@ class DBStorage:
 
     def __init__(self):
         # Default to 'hbnb_dev.db' if no name is provided in env
-        DB_NAME = getenv('HBNB_SQLITE_DB', 'hbnb_dev.db')
-        HBNB_ENV = getenv('HBNB_ENV')
+        #DB_NAME = getenv('HBNB_SQLITE_DB', 'hbnb_dev.db')
+        #HBNB_ENV = getenv('HBNB_ENV')
+        DB_STRING = getenv('DB_URL')
         
         # SQLite connection string: sqlite:///path/to/db
-        self.__engine = create_engine('sqlite:///{}'.format(DB_NAME),
-                                      pool_pre_ping=True)
+        #self.__engine = create_engine('sqlite:///{}'.format(DB_NAME),
+        #                              pool_pre_ping=True)
+
+        self.__engine = create_engine(DB_STRING, pool_size=10, max_overflow=20)
 
         if HBNB_ENV == 'test':
             Base.metadata.drop_all(self.__engine)
