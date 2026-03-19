@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: 'Times New Roman', serif; line-height: 1.6; padding: 20px; }
+        .header { text-align: center; margin-bottom: 30px; border-bottom: 2px solid #000; padding-bottom: 10px; }
+        .section { margin-top: 25px; }
+        .section-title { font-weight: bold; text-transform: uppercase; text-decoration: underline; }
+        .question-container { margin-bottom: 15px; page-break-inside: avoid; }
+        .question-text { font-weight: bold; margin-bottom: 5px; }
+        .options-grid { 
+            display: table; 
+            width: 100%; 
+            margin-left: 20px; 
+            margin-top: 5px; 
+        }
+        .option { display: table-cell; width: 50%; padding: 2px; }
+        .marks { float: right; font-style: italic; font-weight: normal; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>{{ exam.school_name }}</h1>
+        <h2>{{ exam.department_name }}</h2>
+        <h3>{{ exam.course_code }}: {{ exam.subject_name }} ({{ exam.semester }} Semester)</h3>
+        <p><b>Session:</b> {{ exam.session }} | <b>Time:</b> {{ exam.time_allocated }}</p>
+    </div>
+
+    {% for section in exam.sections %}
+    <div class="section">
+        <div class="section-title">{{ section.name }}</div>
+        <p><i>{{ section.instructions }}</i></p>
+        
+        {% for question in section.questions %}
+        <div class="question-container">
+            <div class="question-text">
+                {{ loop.index }}. {{ question.query }}
+                <span class="marks">({{ question.marks }} mks)</span>
+            </div>
+
+            {% if question.options %}
+            <div class="options-grid">
+                {% for option in question.options %}
+                <div class="option">
+                    {# Converts 0, 1, 2, 3 to A, B, C, D #}
+                    ({{ "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[loop.index0] }}) {{ option.answer_string }}
+                </div>
+                {# Every 2 options, start a new row for a clean 2x2 grid #}
+                {% if loop.index % 2 == 0 %}</div><div class="options-grid">{% endif %}
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+</body>
+</html>
