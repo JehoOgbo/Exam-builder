@@ -149,10 +149,19 @@ class DBStorage:
         #self.__engine = create_engine('sqlite:///{}'.format(DB_NAME),
         #                              pool_pre_ping=True)
 
-        self.__engine = create_engine(DB_STRING, pool_size=10, max_overflow=20)
+        # Use connect_args to force SSL and avoid the 'argument 18' string/bool error
+        self.__engine = create_engine(
+            DB_STRING,
+            connect_args={
+                "ssl_verify_cert": True,
+                "ssl_verify_identity": True,
+                "ssl_ca": "/etc/ssl/certs/ca-certificates.crt"
+            },
+            pool_pre_ping=True
+        )
 
-        if HBNB_ENV == 'test':
-            Base.metadata.drop_all(self.__engine)
+        #if HBNB_ENV == 'test':
+        #    Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
         """query on the current database session"""
